@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum VendingSelection {
+enum VendingSelection: String {
     case soda
     case dietSoda
     case chips
@@ -43,11 +43,45 @@ struct Item: VendingItem {
     var quantity: Int
 }
 
+enum InventoryError: Error {
+    case invalidResource
+    case conversionFalure
+    case invalidSelection
+}
+
 class PlistConverter {
     static func dictionary(fromFile name: String, ofType type: String) throws -> [String: AnyObject] {
-        guard let path = Bundle.main.path(forResource: "name", ofType: type) else {
-            
+        guard let path = Bundle.main.path(forResource: name, ofType: type) else {
+            throw InventoryError.invalidResource
         }
+        
+        guard let dictionary = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else {
+            throw InventoryError.conversionFalure
+        }
+        
+        return dictionary
+    }
+}
+
+class InventoryUnarchiver {
+    static func vendingInventory(fromDictionary dictionary: [String: AnyObject]) throws -> [VendingSelection: VendingItem] {
+        
+        var inventory: [VendingSelection: VendingItem] = [:]
+        
+        for (key, value) in dictionary {
+            if let itemDictionary = value as? [String: Any], let price = itemDictionary["price"] as? Double, let quantity = itemDictionary["quantity"] as? Int {
+                let item = Item(price: price, quantity: quantity)
+                
+                guard let selection = VendingSelection(rawValue: key) else {
+                    throw InventoryError.invalidSelection
+                }
+                
+                inventory.updateValue(item, forKey: selection)
+            }
+        }
+        
+        
+        return inventory
     }
 }
 
