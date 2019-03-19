@@ -75,7 +75,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 try vendingMachine.vend(selection: currentSelection, quantity: Int(quantityStepper.value))
                 updateDisplayWith(balance: vendingMachine.amountDeposited, totalPrice: 0.0, itemPrice: 0, itemQuantity: 1)
             } catch VendingMachineError.outOfStock {
-                showAlert()
+                showAlert(title: "Out of Stock", message: "This item is unavailable. Please make another selection", style: .alert)
+            } catch VendingMachineError.invalidSelection {
+                showAlert(title: "Invalid Selection", message: "This item is unavailable. Please make another selection", style: .alert)
+            } catch VendingMachineError.insufficientFunds(let required) {
+                showAlert(title: "Insufficient Funds", message: "There are not enough funds deposited. Please add at least \(required)", style: .alert)
             } catch {
                 
             }
@@ -86,6 +90,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
         } else {
             // FIXME: Alert user to no selection
+//            make show alert method more configurable takes title, message, style
+//            account for every error we throw in the vending machine error type and for each error present an alert view that's configured to that error
         }
     }
     
@@ -122,8 +128,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    func showAlert() {
-        let alertController = UIAlertController(title: "Out of Stock", message: "This item is unavailable. Please make another selection", preferredStyle: .alert)
+    func showAlert(title: String, message: String, style: UIAlertController.Style) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: dismissAlert)
         alertController.addAction(okAction)
