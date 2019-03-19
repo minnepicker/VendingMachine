@@ -75,13 +75,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 try vendingMachine.vend(selection: currentSelection, quantity: Int(quantityStepper.value))
                 updateDisplayWith(balance: vendingMachine.amountDeposited, totalPrice: 0.0, itemPrice: 0, itemQuantity: 1)
             } catch VendingMachineError.outOfStock {
-                showAlert(title: "Out of Stock", message: "This item is unavailable. Please make another selection", style: .alert)
+                showAlertWith(title: "Out of Stock", message: "Please make another selection")
             } catch VendingMachineError.invalidSelection {
-                showAlert(title: "Invalid Selection", message: "This item is unavailable. Please make another selection", style: .alert)
+                showAlertWith(title: "Invalid Selection", message: "This item is unavailable. Please make another selection")
             } catch VendingMachineError.insufficientFunds(let required) {
-                showAlert(title: "Insufficient Funds", message: "There are not enough funds deposited. Please add at least \(required)", style: .alert)
-            } catch {
-                
+                let message = "There are not enough funds deposited. Please add at least $\(required)"
+                showAlertWith(title: "Insufficient Funds", message: message)
+            } catch let error {
+                fatalError("\(error)")
             }
             
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
@@ -128,7 +129,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    func showAlert(title: String, message: String, style: UIAlertController.Style) {
+    func showAlertWith(title: String, message: String, style: UIAlertControllerStyle = .alert) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: dismissAlert)
