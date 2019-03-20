@@ -15,6 +15,7 @@
 		9771F6C71DF0A6C000B2B06D /* VendingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9771F6C61DF0A6C000B2B06D /* VendingItemCell.swift */; };
 		9771F6CD1DF0D68E00B2B06D /* VendingInventory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9771F6CC1DF0D68E00B2B06D /* VendingInventory.plist */; };
 		C042392F223945F200E37E16 /* VendingMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042392E223945F200E37E16 /* VendingMachine.swift */; };
+		C04239332242B0B100E37E16 /* VendingInventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04239322242B0B100E37E16 /* VendingInventory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9771F6C61DF0A6C000B2B06D /* VendingItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendingItemCell.swift; sourceTree = "<group>"; };
 		9771F6CC1DF0D68E00B2B06D /* VendingInventory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VendingInventory.plist; sourceTree = "<group>"; };
 		C042392E223945F200E37E16 /* VendingMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendingMachine.swift; sourceTree = "<group>"; };
+		C04239322242B0B100E37E16 /* VendingInventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendingInventory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				9771F6C01DF0833300B2B06D /* Info.plist */,
 				9771F6CC1DF0D68E00B2B06D /* VendingInventory.plist */,
 				C042392E223945F200E37E16 /* VendingMachine.swift */,
+				C04239322242B0B100E37E16 /* VendingInventory.swift */,
 			);
 			path = VendingMachine;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				9771F6B51DF0833300B2B06D /* AppDelegate.swift in Sources */,
 				9771F6C71DF0A6C000B2B06D /* VendingItemCell.swift in Sources */,
 				C042392F223945F200E37E16 /* VendingMachine.swift in Sources */,
+				C04239332242B0B100E37E16 /* VendingInventory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

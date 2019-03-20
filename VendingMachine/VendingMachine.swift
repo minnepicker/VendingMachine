@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// Sets up all possibilities for FoodVendingMachine.
 enum VendingSelection: String {
     case soda
     case dietSoda
@@ -23,6 +24,7 @@ enum VendingSelection: String {
     case sportsDrink
     case gum
     
+    /// Gets the appropriate image for each item's button
     func icon() -> UIImage {
         if let image = UIImage(named: self.rawValue) {
             return image
@@ -32,11 +34,13 @@ enum VendingSelection: String {
     }
 }
 
+/// Sets requirements for vending items.
 protocol VendingItem {
     var price: Double { get }
     var quantity: Int { get set }
 }
 
+/// Sets requirements for the vending machine
 protocol VendingMachine {
     var selection: [VendingSelection] { get }
     var inventory: [VendingSelection: VendingItem] { get set }
@@ -48,17 +52,21 @@ protocol VendingMachine {
     func item(forSelection selection: VendingSelection) -> VendingItem?
 }
 
+/// Sets up the actual items to be vended.
 struct Item: VendingItem {
     let price: Double
     var quantity: Int
 }
 
+/// Lists out posible errors for the conversion process from plist to
+/// a [VendingSelection: VendingItem] dictionary.
 enum InventoryError: Error {
     case invalidResource
     case conversionFalure
     case invalidSelection
 }
 
+/// Takes a file reference and returns a [String: AnyObject] dictionary.
 class PlistConverter {
     static func dictionary(fromFile name: String, ofType type: String) throws -> [String: AnyObject] {
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
@@ -73,6 +81,7 @@ class PlistConverter {
     }
 }
 
+/// Takes a [String: AnyObject] dictionary and returns a [VendingSelection: VendingItem] dictionary
 class InventoryUnarchiver {
     static func vendingInventory(fromDictionary dictionary: [String: AnyObject]) throws -> [VendingSelection: VendingItem] {
         
@@ -90,17 +99,18 @@ class InventoryUnarchiver {
             }
         }
         
-        
         return inventory
     }
 }
 
+/// Sets up possivle errors in the vend process.
 enum VendingMachineError: Error {
     case invalidSelection
     case outOfStock
     case insufficientFunds(required: Double)
 }
 
+/// This is the logic for the food vending machine.
 class FoodVendingMachine: VendingMachine {
     let selection: [VendingSelection] = [.soda, .dietSoda, .chips, .cookie, .sandwich, .wrap, .candyBar, .popTart, .water, .fruitJuice, .sportsDrink, .gum]
     var inventory: [VendingSelection : VendingItem]
