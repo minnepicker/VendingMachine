@@ -141,6 +141,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func dismissAlert(sender: UIAlertAction) -> Void {
         updateDisplayWith(balance: 0, totalPrice: 0, itemPrice: 0, itemQuantity: 1)
     }
+    
+    @IBAction func depositFunds() {
+        vendingMachine.deposit(5.0)
+        updateDisplayWith(balance: vendingMachine.amountDeposited)
+    }
+    
  
     // MARK: UICollectionViewDataSource
     
