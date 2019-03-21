@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="-407.19999999999999" y="136.28185907046478"/>
         </scene>
-        <!--View Controller-->
+        <!--Deposit Controller-->
         <scene sceneID="NUh-Ro-Axq">
             <objects>
-                <viewController id="rLa-ZQ-2gi" sceneMemberID="viewController">
+                <viewController id="rLa-ZQ-2gi" customClass="DepositController" customModule="VendingMachine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zHH-JS-VS3"/>
                         <viewControllerLayoutGuide type="bottom" id="foi-5G-fZX"/>
@@ -254,6 +254,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Dismiss"/>
                                 <connections>
+                                    <action selector="dismiss:" destination="rLa-ZQ-2gi" eventType="touchUpInside" id="MhL-kO-uTL"/>
                                     <action selector="purchase:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rzf-1m-GLd"/>
                                 </connections>
                             </button>
